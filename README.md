@@ -1,4 +1,5 @@
 # k2d2 Backend
+![Travis](https://travis-ci.org/helloproclub/k2d2-backend.svg?branch=master)
 
 Requirement:
 - Node v8.x
