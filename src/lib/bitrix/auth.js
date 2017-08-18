@@ -1,7 +1,14 @@
 const request = require('request-promise');
 const qs = require('querystring');
 
+/**
+ * Bitrix24 Authentication
+ */
 class BitrixAuth{
+    /**
+     * Create Authenticator
+     * @param {object} param - param passed from main Bitrix class
+     */
     constructor(param){
         this.param = param;
         this.authorizationUri = this.param.config.host + "/oauth/authorize?" + qs.stringify({
@@ -12,6 +19,11 @@ class BitrixAuth{
     }
 
 
+    /**
+     * Get token from Bitrix
+     * @param {string} code - Code for get the token
+     * @return {Promise} Token as JSON String
+     */
     async getToken(code){
         if(!code) throw Error("Please provide code");
         const result = await request.get(this.param.config.host + "/oauth/token/?" + qs.stringify({
@@ -27,6 +39,11 @@ class BitrixAuth{
         return result;
     }
 
+    /**
+     * Get new token
+     * @param {string} token - Refresh token
+     * @return {Promise} Token as JSON String
+     */
     async refreshToken(token){
         if((!token) && (this.param.methods.retriveToken)){
             token = await this.param.methods.retriveToken();

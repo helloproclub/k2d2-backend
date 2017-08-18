@@ -4,7 +4,7 @@ const Token = require('../models/Token');
 
 const bitrix = new Bitrix({
   config: {
-    host: "http://k2d2.bitrix24.com",
+    host: "k2d2",
     client_id : "local.599570dd479581.71292583",
     client_secret : "ORqgS5UImeUozO0MvTjOt1SCHE42TKC70hx5md2d0cK7Bm8vvl",
     redirect_uri : "http://localhost:3000/callback"
