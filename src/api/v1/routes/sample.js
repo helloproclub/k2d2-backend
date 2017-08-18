@@ -7,7 +7,7 @@ router.get('/try', async(req, res) => {
     try{
         const cache = await redis.getAsync('user.get');
         if(cache){
-        return res.json(JSON.parse(cache));  
+            return res.json(JSON.parse(cache));  
         }
         const result = await bitrix.callMethod('user.get');
         redis.setex('user.get', 3600, result);
