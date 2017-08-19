@@ -12,7 +12,14 @@ Tested On:
 - Redis 4.0.1
 - MongoDB 3.2.12
 
-# Usage
-1. run `npm install`
-2. run `npm run dev`
-3. Authenticate bitrix by accessing `hostname:port/auth`
+# Setup
+1. Create `.env` file, sample can found in `.env.example`
+2. run `npm install`
+3. run `npm run dev`
+4. Authenticate bitrix24 by accessing `hostname:port/auth`
+5. Profit!!
+
+# TODO
+- [ ] Unit Test
+- [ ] More API Endpoint
+- [ ] API Documentation
