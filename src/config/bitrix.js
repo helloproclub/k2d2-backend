@@ -2,12 +2,12 @@ const app = require('./express');
 const {Bitrix24} = require('b24');
 const Token = require('../models/Token');
 
-const bitrix = new Bitrix({
+const bitrix = new Bitrix24({
   config: {
-    host: "k2d2",
-    client_id : "local.599570dd479581.71292583",
-    client_secret : "ORqgS5UImeUozO0MvTjOt1SCHE42TKC70hx5md2d0cK7Bm8vvl",
-    redirect_uri : "http://localhost:3000/callback"
+    host: process.env.BITRIX24_HOST,
+    client_id : process.env.CLIENT_ID,
+    client_secret : process.env.CLIENT_SECRET,
+    redirect_uri : process.env.REDIRECT_URI
   },
   methods: {
     async saveToken(param){
