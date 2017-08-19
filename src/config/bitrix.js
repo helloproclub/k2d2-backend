@@ -1,6 +1,5 @@
 const app = require('./express');
 const b24 = require('b24');
-const Token = require('../models/Token');
 
 const bitrix = new b24.Bitrix24({
   config: {
