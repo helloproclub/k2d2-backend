@@ -4,7 +4,7 @@
 
 Requirement:
 
-- Node v8.x
+- Node >= 7.6.0
 - Redis
 - MongoDB
 
