@@ -2,12 +2,16 @@
   "name": "k2d2-backend",
   "version": "1.0.0",
   "description": "Backend for k2d2 application",
+  "engines": {
+    "node": "8.1.x"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/helloproclub/k2d2-backend.git"
   },
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/index.js",
     "test": "ava ./tests/test.js",
     "dev": "nodemon ./src/index.js"
   },

@@ -3,3 +3,7 @@ node_js:
   - "8"
 env:
   -CI=true
+deploy:
+  provider: heroku
+  app: "k2d2-backend-dev"
+  api_key: "94bab503-a8a7-4203-84cf-555db741ef40"
