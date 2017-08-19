@@ -1,5 +1,5 @@
 const app = require('./express');
-const Bitrix = require('../lib/bitrix');
+const {Bitrix24} = require('b24');
 const Token = require('../models/Token');
 
 const bitrix = new Bitrix({
