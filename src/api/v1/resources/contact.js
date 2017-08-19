@@ -8,8 +8,8 @@ module.exports = {
             if(cache) return res.json(JSON.parse(cache));
 
             const result = await bitrix.callMethod('crm.contact.list');
-            redis.setex('crm.contact.list', 3600, result);
-            return res.json(JSON.parse(result));
+            redis.setex('crm.contact.list', 3600, JSON.stringify(result));
+            return res.json(result);
         }catch(err){
             next(err);
         }

@@ -1,24 +1,25 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 
 const app = require('./config/express');
-const config = require('./config/env');
 
 
-mongoose.connect(config.db);
+mongoose.connect(process.env.DB);
 mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${config.db}`);
+  throw new Error(`unable to connect to database: ${process.env.DB}`);
 });
 mongoose.connection.on('connected', () => {
-  console.log(`Connected to database: ${config.db}`);
+  console.log(`Connected to database: ${process.env.DB}`);
 });
 
-if (config.env === 'development') {
+if (process.env.NODE_ENV === 'development') {
   mongoose.set('debug', true);
 };
 
 
-app.listen(config.port, () => {
-    console.log(`[${config.env}] Server started on port ${config.port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`[${process.env.ENV}] Server started on port ${process.env.PORT}`);
 });
 
 module.exports = app;
