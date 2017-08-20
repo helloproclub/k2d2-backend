@@ -1,6 +1,6 @@
 const bitrix = require('../../../config/bitrix');
 const redis = require('../../../config/redis');
-const utils = require('./utils/doctor');
+const utils = require('./utils');
 
 module.exports = {
     async list(req, res, next){
