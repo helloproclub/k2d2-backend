@@ -20,8 +20,15 @@ module.exports = {
             if(!company){
                 company = await bitrix.callMethod('crm.company.list', {
                     "SELECT[0]" : wikidataField,
-                    "SELECT[1]" : "TITLE"
+                    "SELECT[1]" : "TITLE",
+                    "SELECT[2]" : "COMPANY_TYPE",                    
                 });
+
+
+                company.result.forEach((it) => {
+                    it.wikidata = it[wikidataField]
+                });
+
                 redis.setex('company.list', 300, JSON.stringify(company));
             }else{
                 company = JSON.parse(company);
@@ -30,7 +37,6 @@ module.exports = {
             let companyObj = {};
             company.result.forEach((it) => {
                 companyObj[it.ID] = it;
-                companyObj[it.ID].wikidata = it[wikidataField];
             })
 
             result.result.forEach((it) => {
