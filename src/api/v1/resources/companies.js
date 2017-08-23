@@ -6,22 +6,33 @@ module.exports = {
     async list(req, res, next){
         try{
             const cache = await redis.getAsync('company.list');
-            if(cache) return res.json(JSON.parse(cache));
+            let result;
+            if(cache) {
+                result = JSON.parse(cache);
+            }else{
+                //Wikidata field
+                const wikidataField = await utils.getWikidataFieldId();
+                
+                result = await bitrix.callMethod('crm.company.list', {
+                    "SELECT[0]" : wikidataField,
+                    "SELECT[1]" : "TITLE",
+                    "SELECT[2]" : "COMPANY_TYPE",
+                });
 
-            //Wikidata field
-            const wikidataField = await utils.getWikidataFieldId();
-            
-            let result = await bitrix.callMethod('crm.company.list', {
-                "SELECT[0]" : wikidataField,
-                "SELECT[1]" : "TITLE",
-                "SELECT[2]" : "COMPANY_TYPE",
-            });
+                result.result.forEach((it) => {
+                    it.wikidata = it[wikidataField]
+                });
 
-            result.result.forEach((it) => {
-                it.wikidata = it[wikidataField]
-            });
+                redis.setex('company.list', 300, JSON.stringify(result));
+            }
 
-            redis.setex('company.list', 300, JSON.stringify(result));
+            //Do filter
+            if(req.query.q){
+                result.result = result.result.filter((it)=>{
+                    return it.TITLE.match(req.query.q) != null
+                })
+                result.total = result.result.length;
+            }
             return res.json(result);
         }catch(err){
             next(err);
